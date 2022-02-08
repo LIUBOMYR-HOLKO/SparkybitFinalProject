@@ -1,42 +1,42 @@
 <apex:page controller="ProfileInfoPageController" action="{!updateTokens}">
-    <apex:pageMessages/>
+    <apex:pageMessages />
 <apex:form >
 <apex:pageBlock >
     <apex:pageBlockSection >
 
-        <apex:outputLabel>Name</apex:outputLabel>
+        <apex:outputLabel >Name</apex:outputLabel>
             <apex:outputLabel value="{!name}" ></apex:outputLabel>
     <!-- <apex:outputLabel value="{!user.Name}"></apex:outputLabel> -->
-    <apex:outputLabel>Deposit</apex:outputLabel>
+    <apex:outputLabel >Deposit</apex:outputLabel>
     <apex:outputLabel value="{!deposit}"></apex:outputLabel>
-    <apex:outputLabel>State</apex:outputLabel>
+    <apex:outputLabel >State</apex:outputLabel>
     <apex:selectList value="{!state}" size="1">
                             <apex:selectOptions value="{!states}"/>
                             <apex:actionSupport event="onchange"/>
     </apex:selectList>
     <!-- <apex:inputText value="{!state}"></apex:inputText> -->
-    <apex:outputLabel>Street</apex:outputLabel>
+    <apex:outputLabel >Street</apex:outputLabel>
     <apex:inputText value="{!street}"></apex:inputText>
-    <apex:outputLabel>House Number</apex:outputLabel>
+    <apex:outputLabel >House Number</apex:outputLabel>
     <apex:inputText value="{!houseNumber}"></apex:inputText>
-    <apex:outputLabel>Appartement Number</apex:outputLabel>
+    <apex:outputLabel >Appartement Number</apex:outputLabel>
     <apex:inputText value="{!appartementNumber}"></apex:inputText>
-    <apex:outputLabel>Electricity Meter Readings</apex:outputLabel>
+    <apex:outputLabel >Electricity Meter Readings</apex:outputLabel>
     <apex:inputText value="{!electricityMeterReadings}"></apex:inputText>
-    <apex:outputLabel>Amount For Electricity</apex:outputLabel>
+    <apex:outputLabel >Amount For Electricity</apex:outputLabel>
     <apex:outputLabel value="{!amountForElectricity}"></apex:outputLabel>
-    <apex:outputLabel>Gas Meter Readings</apex:outputLabel>
+    <apex:outputLabel >Gas Meter Readings</apex:outputLabel>
     <apex:inputText value="{!gasMeterReadings}"></apex:inputText>
-    <apex:outputLabel>Amount For Gas</apex:outputLabel>
+    <apex:outputLabel >Amount For Gas</apex:outputLabel>
     <apex:outputLabel value="{!amountForGas}"></apex:outputLabel>
-    <apex:outputLabel>Water Meter Readings</apex:outputLabel>
+    <apex:outputLabel >Water Meter Readings</apex:outputLabel>
     <apex:inputText value="{!waterMeterReadings}"></apex:inputText>
-    <apex:outputLabel>Amount For Water</apex:outputLabel>
+    <apex:outputLabel >Amount For Water</apex:outputLabel>
     <apex:outputLabel value="{!amountForWater}"></apex:outputLabel>
 
     <!-- <apex:inputText value="{!waterService}"></apex:inputText> -->
 </apex:pageBlockSection>
-    <apex:pageBlockButtons>
+    <apex:pageBlockButtons >
         <apex:commandButton action="{!quicksave}" value="Save"/>
 
     </apex:pageBlockButtons>

@@ -27,9 +27,9 @@ public class ProfileInfoPageController {
         if(hasAccess){
             CookieManagerService cookieManager = new CookieManagerService();
             Id = tokenManager.getUserIdByRefreshToken(cookieManager.getCookie('REFRESH-TOKEN'));
-            user = [SELECT Amount_For_Electricity__c, Amount_For_Gas__c, Amount_For_Water__c, 
+            user = [SELECT Id, Amount_For_Electricity__c, Amount_For_Gas__c, Amount_For_Water__c, 
             Appartement_Number__c, Deposit__c, Electricity_Meter_Readings__c, Email__c, Gas_Meter_Readings__c,
-            House_Number__c, State__c, Street__c, Water_Meter_Readings__c, Id, Name FROM User__c WHERE Id = :Id ];
+            House_Number__c, State__c, Street__c, Water_Meter_Readings__c, Name FROM User__c WHERE Id = :Id ];
             name = user.Name;
             deposit = user.Deposit__c;
             states = getPicklistValuesToSelectOptions(User__c.State__c.getDescribe());
@@ -43,7 +43,6 @@ public class ProfileInfoPageController {
             amountForGas = user.Amount_For_Gas__c;
             waterMeterReadings = user.Water_Meter_Readings__c;
             amountForWater = user.Amount_For_Water__c;
-
         }
     }
 
@@ -71,21 +70,27 @@ public class ProfileInfoPageController {
         return null;
     }
 
-    public void quicksave(){
+    public Pagereference quicksave(){
         try{
-        user.State__c= state;
-        user.Street__c = street;
-        user.House_Number__c = houseNumber;
-        user.Appartement_Number__c = appartementNumber;
-        user.Electricity_Meter_Readings__c = electricityMeterReadings;
-        user.Gas_Meter_Readings__c = gasMeterReadings;
-        user.Water_Meter_Readings__c = waterMeterReadings;
-        update user;
-        ApexPages.addMessage(new ApexPages.Message(ApexPages.severity.INFO, 'You successfully changed user data'));
+            Region__c region = [SELECT Id,State__c, Gas_Rate__c, Water_Rate__c, Electricity_Rate__c FROM Region__c WHERE State__c = :state];
+            user.State__c= state;
+            user.Street__c = street;
+            user.House_Number__c = houseNumber;
+            user.Appartement_Number__c = appartementNumber;
+            user.Amount_For_Electricity__c += (electricityMeterReadings - user.Electricity_Meter_Readings__c) *region.Electricity_Rate__c ;
+            user.Electricity_Meter_Readings__c = electricityMeterReadings;
+            user.Amount_For_Gas__c += (gasMeterReadings - user.Gas_Meter_Readings__c)* region.Gas_Rate__c;
+            user.Gas_Meter_Readings__c = gasMeterReadings;
+            user.Amount_For_Water__c += (waterMeterReadings - user.Water_Meter_Readings__c)* region.Water_Rate__c;
+            user.Water_Meter_Readings__c = waterMeterReadings;
+            update user;
         }
         catch(Exception e){
             ApexPages.addMessage(new ApexPages.Message(ApexPages.severity.ERROR, 'You should update all readings'));
             System.debug('[ProfileInfoPageController.quicksave] When you tried update user you got exception'+e);
         }
+        PageReference pageReference = new PageReference('/apex/ProfileInfoPage');
+        pageReference.setRedirect(true);
+        return pageReference;
     }
 }
