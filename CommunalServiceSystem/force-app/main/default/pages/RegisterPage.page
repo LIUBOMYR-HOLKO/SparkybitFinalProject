@@ -3,13 +3,13 @@
     <apex:form >
         <apex:pageBlock >
             <apex:outputLabel >Email: </apex:outputLabel>
-            <apex:inputText value="{!user.Email__c}"/>
+            <apex:inputText value="{!email}"/>
             <apex:outputLabel >Password: </apex:outputLabel>
-            <apex:inputText value="{!user.Password__c}"/>
+            <apex:inputText value="{!password}"/>
             <apex:outputLabel >Username: </apex:outputLabel>
-            <apex:inputText value="{!user.Name}"/>
+            <apex:inputText value="{!name}"/>
             <apex:outputLabel >State</apex:outputLabel>
-            <apex:inputField value="{!user.State__c}"/>
+            <apex:inputText value="{!state}"/>
 
             <apex:commandButton value="Register" action="{!register}"/>
         </apex:pageBlock>
