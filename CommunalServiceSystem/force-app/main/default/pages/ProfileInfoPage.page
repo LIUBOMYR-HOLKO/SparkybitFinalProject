@@ -38,7 +38,7 @@
 </apex:pageBlockSection>
     <apex:pageBlockButtons >
         <apex:commandButton action="{!quicksave}" value="Save"/>
-
+        <apex:commandButton action="{!pay}" value="Pay"/>
     </apex:pageBlockButtons>
 </apex:pageBlock>
 </apex:form>

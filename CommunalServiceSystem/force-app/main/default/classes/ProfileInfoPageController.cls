@@ -56,7 +56,7 @@ public class ProfileInfoPageController {
         return options;
     }
 
-    public PageReference updateTokens(){
+    public Pagereference updateTokens(){
         if(!hasAccess){
             PageReference pr = new PageReference(ApexPages.currentPage().getUrl());
             pr.setRedirect(true);
@@ -92,5 +92,9 @@ public class ProfileInfoPageController {
         PageReference pageReference = new PageReference('/apex/ProfileInfoPage');
         pageReference.setRedirect(true);
         return pageReference;
+    }
+
+    public PageReference pay(){
+        return new Pagereference('/apex/PaymentPage');
     }
 }
