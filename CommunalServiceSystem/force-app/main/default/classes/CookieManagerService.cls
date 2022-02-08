@@ -5,4 +5,15 @@ public with sharing class CookieManagerService {
         ApexPages.currentPage().setCookies(new Cookie[] {accessCookie,refreshCookie});
     }
     
+    //not yet used anywhere
+    public String getCookie(String cookieKey){
+        try{
+            return apexpages.currentPage().getCookies().get(cookieKey).getValue();
+        }
+        catch(Exception e){
+            System.debug('[CookieManagerService.getCookie] When you tried to get cookie you got exception');
+        }
+        return null;
+    }
+    
 }
