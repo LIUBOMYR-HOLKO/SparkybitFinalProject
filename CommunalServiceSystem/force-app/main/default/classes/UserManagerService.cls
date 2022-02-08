@@ -8,15 +8,9 @@ public with sharing class UserManagerService {
     public User__c createUser(User__c user){                
         try{
             String encryptedPassword = EncodingUtil.convertToHex(encrypt(user.Password__c));
-            User__c userInDB = new User__c();
-            userInDB.Email__c = user.Email__c;
-            userInDB.Password__c = encryptedPassword;
-            userInDB.Name = user.Name;
-            userInDB.State__c = user.State__c;
-            userInDB.Street__c = user.Street__c;
-            userInDB.House_Number__c = user.House_Number__c;
-            userInDB.Appartement_Number__c = user.Appartement_Number__c;
-            
+            User__c userInDB = new User__c(Email__c = user.Email__c, Password__c = encryptedPassword, 
+                                           Name = user.Name, State__c = user.State__c);
+
             insert userInDB;
             System.debug('[UserManagerService.createUser] User successfully registered');
             return user;
