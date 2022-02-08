@@ -4,6 +4,11 @@ public with sharing class HomePageController {
         return pg;
     }
     
+    public PageReference redirectToProfileInfoPage(){
+        PageReference pg = new pageReference('/apex/ProfileInfoPage');
+        return pg;
+    }
+
     public PageReference redirectToRegisterPage(){
         PageReference pg = new pageReference('/apex/RegisterPage');
         return pg;
