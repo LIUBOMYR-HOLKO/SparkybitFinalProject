@@ -1,0 +1,14 @@
+<apex:page controller="LoginPageController">
+    <apex:pageMessages ></apex:pageMessages>
+    <apex:form >
+        <apex:pageBlock >
+            <apex:outputLabel >Email: </apex:outputLabel>
+            <apex:inputText value="{!email}"/>
+            <apex:outputLabel >Password: </apex:outputLabel>
+            <apex:inputText value="{!password}"/>
+            
+            <apex:commandButton value="Login" action="{!login}"/>
+            
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
