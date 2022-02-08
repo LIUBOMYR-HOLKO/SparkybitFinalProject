@@ -9,7 +9,10 @@
             <apex:outputLabel >Username: </apex:outputLabel>
             <apex:inputText value="{!name}"/>
             <apex:outputLabel >State</apex:outputLabel>
-            <apex:inputText value="{!state}"/>
+            <apex:selectList value="{!state}" size="1">
+                <apex:selectOptions value="{!states}"/>
+                <apex:actionSupport event="onchange"/>
+            </apex:selectList>
 
             <apex:commandButton value="Register" action="{!register}"/>
         </apex:pageBlock>
