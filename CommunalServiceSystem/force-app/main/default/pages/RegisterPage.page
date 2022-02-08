@@ -1,0 +1,17 @@
+<apex:page controller="RegisterPageController">
+    <apex:pageMessages ></apex:pageMessages>
+    <apex:form >
+        <apex:pageBlock >
+            <apex:outputLabel >Email: </apex:outputLabel>
+            <apex:inputText value="{!user.Email__c}"/>
+            <apex:outputLabel >Password: </apex:outputLabel>
+            <apex:inputText value="{!user.Password__c}"/>
+            <apex:outputLabel >Username: </apex:outputLabel>
+            <apex:inputText value="{!user.Name}"/>
+            <apex:outputLabel >State</apex:outputLabel>
+            <apex:inputField value="{!user.State__c}"/>
+
+            <apex:commandButton value="Register" action="{!register}"/>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
