@@ -1,0 +1,8 @@
+<apex:page controller="HomePageController">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:commandButton value="Login"  action="{!redirectToLoginPage}"/>
+            <apex:commandButton value="Register" action="{!redirectToRegisterPage}"/>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
