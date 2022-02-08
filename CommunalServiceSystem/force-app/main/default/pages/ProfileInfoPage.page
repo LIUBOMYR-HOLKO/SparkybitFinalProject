@@ -1,4 +1,5 @@
 <apex:page controller="ProfileInfoPageController" action="{!updateTokens}">
+    <apex:pageMessages/>
 <apex:form >
 <apex:pageBlock >
     <apex:pageBlockSection >
@@ -36,7 +37,7 @@
     <!-- <apex:inputText value="{!waterService}"></apex:inputText> -->
 </apex:pageBlockSection>
     <apex:pageBlockButtons>
-        <!-- <apex:commandButton action="{!}" value="Save"/> -->
+        <apex:commandButton action="{!quicksave}" value="Save"/>
 
     </apex:pageBlockButtons>
 </apex:pageBlock>

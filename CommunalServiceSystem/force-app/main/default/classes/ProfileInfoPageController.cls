@@ -14,7 +14,8 @@ public class ProfileInfoPageController {
     public Decimal amountForWater{get;set;}
 
 
-
+    public User__c user{get;set;}
+    public String Id{get;set;}
     public Boolean hasAccess{get;set;}
 
     TokenManagerService tokenManager = new TokenManagerService();
@@ -25,8 +26,8 @@ public class ProfileInfoPageController {
         
         if(hasAccess){
             CookieManagerService cookieManager = new CookieManagerService();
-            String Id = tokenManager.getUserIdByRefreshToken(cookieManager.getCookie('REFRESH-TOKEN'));
-            User__c user = [SELECT Amount_For_Electricity__c, Amount_For_Gas__c, Amount_For_Water__c, 
+            Id = tokenManager.getUserIdByRefreshToken(cookieManager.getCookie('REFRESH-TOKEN'));
+            user = [SELECT Amount_For_Electricity__c, Amount_For_Gas__c, Amount_For_Water__c, 
             Appartement_Number__c, Deposit__c, Electricity_Meter_Readings__c, Email__c, Gas_Meter_Readings__c,
             House_Number__c, State__c, Street__c, Water_Meter_Readings__c, Id, Name FROM User__c WHERE Id = :Id ];
             name = user.Name;
@@ -68,5 +69,23 @@ public class ProfileInfoPageController {
             return result;
         }
         return null;
+    }
+
+    public void quicksave(){
+        try{
+        user.State__c= state;
+        user.Street__c = street;
+        user.House_Number__c = houseNumber;
+        user.Appartement_Number__c = appartementNumber;
+        user.Electricity_Meter_Readings__c = electricityMeterReadings;
+        user.Gas_Meter_Readings__c = gasMeterReadings;
+        user.Water_Meter_Readings__c = waterMeterReadings;
+        update user;
+        ApexPages.addMessage(new ApexPages.Message(ApexPages.severity.INFO, 'You successfully changed user data'));
+        }
+        catch(Exception e){
+            ApexPages.addMessage(new ApexPages.Message(ApexPages.severity.ERROR, 'You should update all readings'));
+            System.debug('[ProfileInfoPageController.quicksave] When you tried update user you got exception'+e);
+        }
     }
 }
