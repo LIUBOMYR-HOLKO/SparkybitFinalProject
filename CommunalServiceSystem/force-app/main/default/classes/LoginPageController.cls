@@ -1,4 +1,4 @@
-public with sharing class LoginPageController {
+public class LoginPageController {
     public String email{get;set;}
     public String password{get;set;}
     

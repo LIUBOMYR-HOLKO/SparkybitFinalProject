@@ -1,4 +1,4 @@
-public with sharing class EmailManagerService {
+public class EmailManagerService {
 
     public void sendEmail(List<String> recipients, String textBody, String subject){
         Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();

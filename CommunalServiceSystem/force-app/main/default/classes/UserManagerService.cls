@@ -1,4 +1,4 @@
-public with sharing class UserManagerService {
+public class UserManagerService {
     
     public Boolean checkPasswords(String passwordInDatabase, String inputtedPassword){
         Blob encryptedInputtedPassword = encrypt(inputtedPassword);

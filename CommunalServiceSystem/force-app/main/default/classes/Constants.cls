@@ -1,4 +1,4 @@
-public with sharing class Constants {
+public class Constants {
     //PasswordHandler
     public static final Blob MY_KEY = Blob.valueOf('LIUBOMYR HOLKO');
     public static final String ALGORITHM_NAME = 'HMACSHA256';

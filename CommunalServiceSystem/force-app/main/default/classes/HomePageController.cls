@@ -1,4 +1,4 @@
-public with sharing class HomePageController {
+public class HomePageController {
     public PageReference redirectToLoginPage(){
         PageReference pg = new pageReference('/apex/LoginPage');
         return pg;

@@ -1,4 +1,4 @@
-public with sharing class TokenManagerService {
+public class TokenManagerService {
     public String generateJWTToken(Id userId){
         String header = '{"alg": "HS256","typ":"jwt"}';
         String payload = '{"sub":"'+userId+'", "iat": "'+Datetime.now()+'"}';
