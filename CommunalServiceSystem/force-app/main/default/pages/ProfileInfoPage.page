@@ -1,37 +1,44 @@
-<apex:page controller="ProfileInfoPageController">
+<apex:page controller="ProfileInfoPageController" action="{!updateTokens}">
 <apex:form >
 <apex:pageBlock >
     <apex:pageBlockSection >
-    <apex:outputField value="{!user.Name}" ></apex:outputField>
-    <!-- <apex:outputLabel value="{!user.Name}"></apex:outputLabel> -->
-    <!-- <apex:outputLabel>Deposit</apex:outputLabel> -->
-    <apex:outputField value="{!user.Deposit__c}"></apex:outputField>
-    <!-- <apex:outputLabel>State</apex:outputLabel> -->
-    <apex:inputField value="{!user.State__c}"></apex:inputField>
-    <!-- <apex:outputLabel>Street</apex:outputLabel> -->
-    <apex:inputField value="{!user.Street__c}"></apex:inputField>
-    <!-- <apex:outputLabel>House Number</apex:outputLabel> -->
-    <apex:inputField value="{!user.House_Number__c}"></apex:inputField>
-    <!-- <apex:outputLabel>Appartement Number</apex:outputLabel> -->
-    <apex:inputField value="{!user.Appartement_Number__c}"></apex:inputField>
-    <!-- <apex:outputLabel>Electricity Meter Readings</apex:outputLabel> -->
-    <apex:inputField value="{!user.Electricity_Meter_Readings__c}"></apex:inputField>
-    <!-- <apex:outputLabel>Amount For Electricity</apex:outputLabel> -->
-    <apex:outputField value="{!user.Amount_For_Electricity__c}"></apex:outputField>
-    <!-- <apex:outputLabel>Gas Meter Readings</apex:outputLabel> -->
-    <apex:inputField value="{!user.Gas_Meter_Readings__c}"></apex:inputField>
-    <!-- <apex:outputLabel>Amount For Gas</apex:outputLabel> -->
-    <apex:outputField value="{!user.Amount_For_Gas__c}"></apex:outputField>
-    <!-- <apex:outputLabel>Water Meter Readings</apex:outputLabel> -->
-    <apex:inputField value="{!user.Water_Meter_Readings__c}"></apex:inputField>
-    <!-- <apex:outputLabel>Amount For Water</apex:outputLabel> -->
-    <apex:outputField value="{!user.Amount_For_Water__c}"></apex:outputField>
 
-    <apex:inputField value="{!user.Electricity_Service__c}"></apex:inputField>
-    <apex:inputField value="{!user.Gas_Serivce__c}"></apex:inputField>
-    <apex:inputField value="{!user.Water_Service__c}"></apex:inputField>
+        <apex:outputLabel>Name</apex:outputLabel>
+            <apex:outputLabel value="{!name}" ></apex:outputLabel>
+    <!-- <apex:outputLabel value="{!user.Name}"></apex:outputLabel> -->
+    <apex:outputLabel>Deposit</apex:outputLabel>
+    <apex:outputLabel value="{!deposit}"></apex:outputLabel>
+    <apex:outputLabel>State</apex:outputLabel>
+    <apex:selectList value="{!state}" size="1">
+                            <apex:selectOptions value="{!states}"/>
+                            <apex:actionSupport event="onchange"/>
+    </apex:selectList>
+    <!-- <apex:inputText value="{!state}"></apex:inputText> -->
+    <apex:outputLabel>Street</apex:outputLabel>
+    <apex:inputText value="{!street}"></apex:inputText>
+    <apex:outputLabel>House Number</apex:outputLabel>
+    <apex:inputText value="{!houseNumber}"></apex:inputText>
+    <apex:outputLabel>Appartement Number</apex:outputLabel>
+    <apex:inputText value="{!appartementNumber}"></apex:inputText>
+    <apex:outputLabel>Electricity Meter Readings</apex:outputLabel>
+    <apex:inputText value="{!electricityMeterReadings}"></apex:inputText>
+    <apex:outputLabel>Amount For Electricity</apex:outputLabel>
+    <apex:outputLabel value="{!amountForElectricity}"></apex:outputLabel>
+    <apex:outputLabel>Gas Meter Readings</apex:outputLabel>
+    <apex:inputText value="{!gasMeterReadings}"></apex:inputText>
+    <apex:outputLabel>Amount For Gas</apex:outputLabel>
+    <apex:outputLabel value="{!amountForGas}"></apex:outputLabel>
+    <apex:outputLabel>Water Meter Readings</apex:outputLabel>
+    <apex:inputText value="{!waterMeterReadings}"></apex:inputText>
+    <apex:outputLabel>Amount For Water</apex:outputLabel>
+    <apex:outputLabel value="{!amountForWater}"></apex:outputLabel>
+
+    <!-- <apex:inputText value="{!waterService}"></apex:inputText> -->
 </apex:pageBlockSection>
-    
+    <apex:pageBlockButtons>
+        <!-- <apex:commandButton action="{!}" value="Save"/> -->
+
+    </apex:pageBlockButtons>
 </apex:pageBlock>
 </apex:form>
 </apex:page>
