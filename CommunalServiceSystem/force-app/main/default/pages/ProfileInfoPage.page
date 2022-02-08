@@ -1,0 +1,37 @@
+<apex:page controller="ProfileInfoPageController">
+<apex:form >
+<apex:pageBlock >
+    <apex:pageBlockSection >
+    <apex:outputField value="{!user.Name}" ></apex:outputField>
+    <!-- <apex:outputLabel value="{!user.Name}"></apex:outputLabel> -->
+    <!-- <apex:outputLabel>Deposit</apex:outputLabel> -->
+    <apex:outputField value="{!user.Deposit__c}"></apex:outputField>
+    <!-- <apex:outputLabel>State</apex:outputLabel> -->
+    <apex:inputField value="{!user.State__c}"></apex:inputField>
+    <!-- <apex:outputLabel>Street</apex:outputLabel> -->
+    <apex:inputField value="{!user.Street__c}"></apex:inputField>
+    <!-- <apex:outputLabel>House Number</apex:outputLabel> -->
+    <apex:inputField value="{!user.House_Number__c}"></apex:inputField>
+    <!-- <apex:outputLabel>Appartement Number</apex:outputLabel> -->
+    <apex:inputField value="{!user.Appartement_Number__c}"></apex:inputField>
+    <!-- <apex:outputLabel>Electricity Meter Readings</apex:outputLabel> -->
+    <apex:inputField value="{!user.Electricity_Meter_Readings__c}"></apex:inputField>
+    <!-- <apex:outputLabel>Amount For Electricity</apex:outputLabel> -->
+    <apex:outputField value="{!user.Amount_For_Electricity__c}"></apex:outputField>
+    <!-- <apex:outputLabel>Gas Meter Readings</apex:outputLabel> -->
+    <apex:inputField value="{!user.Gas_Meter_Readings__c}"></apex:inputField>
+    <!-- <apex:outputLabel>Amount For Gas</apex:outputLabel> -->
+    <apex:outputField value="{!user.Amount_For_Gas__c}"></apex:outputField>
+    <!-- <apex:outputLabel>Water Meter Readings</apex:outputLabel> -->
+    <apex:inputField value="{!user.Water_Meter_Readings__c}"></apex:inputField>
+    <!-- <apex:outputLabel>Amount For Water</apex:outputLabel> -->
+    <apex:outputField value="{!user.Amount_For_Water__c}"></apex:outputField>
+
+    <apex:inputField value="{!user.Electricity_Service__c}"></apex:inputField>
+    <apex:inputField value="{!user.Gas_Serivce__c}"></apex:inputField>
+    <apex:inputField value="{!user.Water_Service__c}"></apex:inputField>
+</apex:pageBlockSection>
+    
+</apex:pageBlock>
+</apex:form>
+</apex:page>
