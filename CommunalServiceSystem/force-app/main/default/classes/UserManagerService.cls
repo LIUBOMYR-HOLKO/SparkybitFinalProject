@@ -79,6 +79,8 @@ public with sharing class UserManagerService {
             System.debug(user);
             User__c createdUser = createUser(user);
             System.debug(createdUser);
+            EmailManagerService emailManager = new EmailManagerService();
+            emailManager.sendEmail(new List<String>{user.Email__c}, 'You have successfully registered on the site', 'Welcome to the site');
             return signIn(createdUser.Email__c, user.Password__c);
         }
         catch(Exception e){
