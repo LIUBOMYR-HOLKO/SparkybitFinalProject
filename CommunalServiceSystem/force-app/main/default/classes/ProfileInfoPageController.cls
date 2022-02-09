@@ -3,9 +3,6 @@ public class ProfileInfoPageController {
     public Decimal deposit{get;set;}
     public List<SelectOption> states{get;set;}
     public String state{get;set;}
-    public String street{get;set;}
-    public String houseNumber{get;set;}
-    public Decimal appartementNumber{get;set;}
     public Decimal electricityMeterReadings{get;set;}
     public Decimal amountForElectricity{get;set;}
     public Decimal gasMeterReadings{get;set;}
@@ -28,15 +25,12 @@ public class ProfileInfoPageController {
             CookieManagerService cookieManager = new CookieManagerService();
             Id = tokenManager.getUserIdByRefreshToken(cookieManager.getCookie('REFRESH-TOKEN'));
             user = [SELECT Id, Amount_For_Electricity__c, Amount_For_Gas__c, Amount_For_Water__c, 
-            Appartement_Number__c, Deposit__c, Electricity_Meter_Readings__c, Email__c, Gas_Meter_Readings__c,
-            House_Number__c, State__c, Street__c, Water_Meter_Readings__c, Name FROM User__c WHERE Id = :Id ];
+            Deposit__c, Electricity_Meter_Readings__c, Email__c, Gas_Meter_Readings__c,
+            State__c, Water_Meter_Readings__c, Name FROM User__c WHERE Id = :Id ];
             name = user.Name;
             deposit = user.Deposit__c;
             states = getPicklistValuesToSelectOptions(User__c.State__c.getDescribe());
             state = user.State__c;
-            street = user.Street__c;
-            houseNumber = user.House_Number__c;
-            appartementNumber = user.Appartement_Number__c;
             electricityMeterReadings = user.Electricity_Meter_Readings__c;
             amountForElectricity = user.Amount_For_Electricity__c;
             gasMeterReadings = user.Gas_Meter_Readings__c;
@@ -58,31 +52,36 @@ public class ProfileInfoPageController {
 
     public Pagereference updateTokens(){
         if(!hasAccess){
-            PageReference pr = new PageReference(ApexPages.currentPage().getUrl());
-            pr.setRedirect(true);
+            PageReference pageReference = new PageReference(ApexPages.currentPage().getUrl());
+            pageReference.setRedirect(true);
             
             PageReference result = tokenManager.updateTokens();
             if(result == null){
-                return pr; 
+                return pageReference; 
             }
             return result;
         }
         return null;
     }
-
-    public Pagereference quicksave(){
-        try{
+	
+    
+    public void setUserData(){
             Region__c region = [SELECT Id,State__c, Gas_Rate__c, Water_Rate__c, Electricity_Rate__c FROM Region__c WHERE State__c = :state];
+       // if(state!=user.State__c){
+          //  Decimal 
+        //}
             user.State__c= state;
-            user.Street__c = street;
-            user.House_Number__c = houseNumber;
-            user.Appartement_Number__c = appartementNumber;
             user.Amount_For_Electricity__c += (electricityMeterReadings - user.Electricity_Meter_Readings__c) *region.Electricity_Rate__c ;
             user.Electricity_Meter_Readings__c = electricityMeterReadings;
             user.Amount_For_Gas__c += (gasMeterReadings - user.Gas_Meter_Readings__c)* region.Gas_Rate__c;
             user.Gas_Meter_Readings__c = gasMeterReadings;
             user.Amount_For_Water__c += (waterMeterReadings - user.Water_Meter_Readings__c)* region.Water_Rate__c;
             user.Water_Meter_Readings__c = waterMeterReadings;
+    }
+    public Pagereference quicksave(){
+        try{
+            
+			setUserData();
             update user;
         }
         catch(Exception e){
@@ -95,6 +94,15 @@ public class ProfileInfoPageController {
     }
 
     public PageReference pay(){
-        return new Pagereference('/apex/PaymentPage');
+        PageReference pageReference = new PageReference('/apex/PaymentPage');
+        pageReference.setRedirect(false);
+        return pageReference;
     }
+    
+   	public PageReference showHistory(){
+        PageReference pageReference = new PageReference('/apex/HistoryPaymentPage');
+        pageReference.setRedirect(false);
+        return pageReference;
+    }
+    
 }

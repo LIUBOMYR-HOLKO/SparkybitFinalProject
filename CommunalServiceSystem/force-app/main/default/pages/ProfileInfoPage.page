@@ -6,7 +6,6 @@
 
         <apex:outputLabel >Name</apex:outputLabel>
             <apex:outputLabel value="{!name}" ></apex:outputLabel>
-    <!-- <apex:outputLabel value="{!user.Name}"></apex:outputLabel> -->
     <apex:outputLabel >Deposit</apex:outputLabel>
     <apex:outputLabel value="{!deposit}"></apex:outputLabel>
     <apex:outputLabel >State</apex:outputLabel>
@@ -14,13 +13,6 @@
                             <apex:selectOptions value="{!states}"/>
                             <apex:actionSupport event="onchange"/>
     </apex:selectList>
-    <!-- <apex:inputText value="{!state}"></apex:inputText> -->
-    <apex:outputLabel >Street</apex:outputLabel>
-    <apex:inputText value="{!street}"></apex:inputText>
-    <apex:outputLabel >House Number</apex:outputLabel>
-    <apex:inputText value="{!houseNumber}"></apex:inputText>
-    <apex:outputLabel >Appartement Number</apex:outputLabel>
-    <apex:inputText value="{!appartementNumber}"></apex:inputText>
     <apex:outputLabel >Electricity Meter Readings</apex:outputLabel>
     <apex:inputText value="{!electricityMeterReadings}"></apex:inputText>
     <apex:outputLabel >Amount For Electricity</apex:outputLabel>
@@ -34,11 +26,11 @@
     <apex:outputLabel >Amount For Water</apex:outputLabel>
     <apex:outputLabel value="{!amountForWater}"></apex:outputLabel>
 
-    <!-- <apex:inputText value="{!waterService}"></apex:inputText> -->
 </apex:pageBlockSection>
     <apex:pageBlockButtons >
         <apex:commandButton action="{!quicksave}" value="Save"/>
         <apex:commandButton action="{!pay}" value="Pay"/>
+        <apex:commandButton action="{!showHistory}" value="showHistory"/>
     </apex:pageBlockButtons>
 </apex:pageBlock>
 </apex:form>
