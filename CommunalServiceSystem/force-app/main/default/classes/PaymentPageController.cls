@@ -65,11 +65,12 @@ public class PaymentPageController {
             return pageReference;
         }
         catch(Exception e){
-            pageReference.setRedirect(true);
+            //pageReference.setRedirect(true);
             System.debug('[PaymentPageController.pay] When you tried pay you got exception'+e);
+
         }
         
-        return pageReference;
+        return null;
     }
 
 }

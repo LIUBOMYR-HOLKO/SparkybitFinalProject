@@ -65,27 +65,49 @@ public class ProfileInfoPageController {
     }
 	
     
-    public void setUserData(){
+    public Boolean canSetUserData(){
+        try{
             Region__c region = [SELECT Id,State__c, Gas_Rate__c, Water_Rate__c, Electricity_Rate__c FROM Region__c WHERE State__c = :state];
-       // if(state!=user.State__c){
-          //  Decimal 
-        //}
-            user.State__c= state;
+
             user.Amount_For_Electricity__c += (electricityMeterReadings - user.Electricity_Meter_Readings__c) *region.Electricity_Rate__c ;
             user.Electricity_Meter_Readings__c = electricityMeterReadings;
             user.Amount_For_Gas__c += (gasMeterReadings - user.Gas_Meter_Readings__c)* region.Gas_Rate__c;
             user.Gas_Meter_Readings__c = gasMeterReadings;
             user.Amount_For_Water__c += (waterMeterReadings - user.Water_Meter_Readings__c)* region.Water_Rate__c;
             user.Water_Meter_Readings__c = waterMeterReadings;
+
+            if(state!=user.State__c){
+                Decimal amountToPay = user.Amount_For_Electricity__c + user.Amount_For_Gas__c + user.Amount_For_Water__c;
+                System.debug(amountToPay);
+                System.debug(amountToPay!=0);
+                if(amountToPay!= 0){
+                    System.debug('here 1');
+                    
+                    return false;
+                }else{
+                    System.debug('here 2');
+                    user.State__c= state;
+                    return true;
+                }
+             }
+        }catch(Exception e){
+            ApexPages.addMessage(new ApexPages.Message(ApexPages.severity.ERROR, 'In new region doesnnot exist any communal service'));
+            System.debug('[ProfileInfoPageController.quicksave] When you tried update user you got exception'+e);
+            return false;
+        }
+        return true;
     }
     public Pagereference quicksave(){
         try{
-            
-			setUserData();
-            update user;
+ 
+			if(canSetUserData()){
+                update user;
+            }else{
+               ApexPages.addMessage(new ApexPages.Message(ApexPages.severity.ERROR, 'You cannot update state if you have dobt'));
+               return null;
+            }
         }
         catch(Exception e){
-            ApexPages.addMessage(new ApexPages.Message(ApexPages.severity.ERROR, 'You should update all readings'));
             System.debug('[ProfileInfoPageController.quicksave] When you tried update user you got exception'+e);
         }
         PageReference pageReference = new PageReference('/apex/ProfileInfoPage');
