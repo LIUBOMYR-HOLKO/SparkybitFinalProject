@@ -122,7 +122,7 @@ public class ProfileInfoPageController {
     }
     
    	public PageReference showHistory(){
-        PageReference pageReference = new PageReference('/apex/HistoryPaymentPage');
+        PageReference pageReference = new PageReference('/apex/HistoryPaymentPage?id='+user.Id);
         pageReference.setRedirect(false);
         return pageReference;
     }
