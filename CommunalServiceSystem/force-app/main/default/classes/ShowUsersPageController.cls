@@ -1,7 +1,7 @@
 public class ShowUsersPageController {
     public User__c manager{get;set;}
     public List<User__c> users{get;set;}
-    public String historyId{get;set;}
+    public String userId{get;set;}
     public Boolean hasAccess{get;set;}
     public Boolean isManager {get;set;}
     TokenManagerService tokenManager = new TokenManagerService();
@@ -45,7 +45,13 @@ public class ShowUsersPageController {
     }
 
     public Pagereference seeHistory(){
-        Pagereference pageReference = new Pagereference('/apex/HistoryPaymentPage?id='+historyId);
+        Pagereference pageReference = new Pagereference('/apex/HistoryPaymentPage?id='+userId);
         return pageReference;
     }
+
+    public Pagereference editMonthlyPayment(){
+        Pagereference pageReference = new Pagereference('/apex/EditMonthlyPaymentPage?id='+userId);
+        return pageReference;
+    }
+    
 }
