@@ -8,14 +8,16 @@ public class ShowUsersPageController {
     UserManagerService userManager = new UserManagerService();
 
     public ShowUsersPageController() {
+
         hasAccess = userManager.isAuthenticated();
         isManager = userManager.isAuthorized();
+
         if(hasAccess && isManager){
                 CookieManagerService cookieManager = new CookieManagerService();
                 String Id = tokenManager.getUserIdByRefreshToken(cookieManager.getCookie('REFRESH-TOKEN'));
+
                 manager = [SELECT Id, State__c FROM User__c WHERE Id = :Id];
                 users = [SELECT Id, Name, Email__c, State__c, Manager__c FROM User__c WHERE State__c = :manager.State__c AND Manager__c = false];
-
         }
         
     }
@@ -34,7 +36,9 @@ public class ShowUsersPageController {
             return result;
         }else{
             if(!isManager){
-                return new Pagereference('/apex/HomePage');
+                PageReference pageReference =new Pagereference('/apex/HomePage');
+                pageReference.setRedirect(true);
+                return pageReference;
             }
         }
         return null;
