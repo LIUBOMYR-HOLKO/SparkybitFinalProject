@@ -1,0 +1,17 @@
+<apex:page controller="ShowUsersPageController" action="{!updateTokens}">
+    <apex:form id="mainForm" >
+        <apex:pageBlock >
+            
+            <apex:pageBlockTable value="{!users}" var="user">
+                <apex:column>
+                  <apex:commandButton action="{!seeHistory}" value="{!user}" reRender="mainForm" >
+                                <apex:param name="backgroundColorParameter" assignTo="{!historyId}" value="{!user.Id}" />
+                            </apex:commandButton>
+                </apex:column>
+                <apex:column value="{!user.Email__c}"/>
+                <apex:column value="{!user.State__c}"/>
+            </apex:pageBlockTable>
+            </apex:pageBlock>
+        
+        </apex:form>
+    </apex:page>

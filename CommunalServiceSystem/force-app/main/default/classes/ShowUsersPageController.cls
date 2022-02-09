@@ -1,0 +1,47 @@
+public class ShowUsersPageController {
+    public User__c manager{get;set;}
+    public List<User__c> users{get;set;}
+    public String historyId{get;set;}
+    public Boolean hasAccess{get;set;}
+    public Boolean isManager {get;set;}
+    TokenManagerService tokenManager = new TokenManagerService();
+    UserManagerService userManager = new UserManagerService();
+
+    public ShowUsersPageController() {
+        hasAccess = userManager.isAuthenticated();
+        isManager = userManager.isAuthorized();
+        if(hasAccess && isManager){
+                CookieManagerService cookieManager = new CookieManagerService();
+                String Id = tokenManager.getUserIdByRefreshToken(cookieManager.getCookie('REFRESH-TOKEN'));
+                manager = [SELECT Id, State__c FROM User__c WHERE Id = :Id];
+                users = [SELECT Id, Name, Email__c, State__c, Manager__c FROM User__c WHERE State__c = :manager.State__c AND Manager__c = false];
+
+        }
+        
+    }
+    public PageReference updateTokens(){
+        if(!hasAccess){
+            PageReference pageReference = new PageReference(ApexPages.currentPage().getUrl());
+
+            pageReference.setRedirect(true);
+            PageReference result = tokenManager.updateTokens();
+
+            if(result == null){
+                if(isManager){
+                    return pageReference; 
+                }
+            }
+            return result;
+        }else{
+            if(!isManager){
+                return new Pagereference('/apex/HomePage');
+            }
+        }
+        return null;
+    }
+
+    public Pagereference seeHistory(){
+        Pagereference pageReference = new Pagereference('/apex/HistoryPaymentPage?id='+historyId);
+        return pageReference;
+    }
+}
