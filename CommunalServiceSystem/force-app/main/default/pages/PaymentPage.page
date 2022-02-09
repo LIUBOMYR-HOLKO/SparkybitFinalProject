@@ -24,6 +24,7 @@
             </apex:pageBlockSection>
             <apex:pageBlockButtons id="payButton">
                 <apex:commandButton action="{!pay}" value="Amount to pay {!amountToPay}"></apex:commandButton>
+                <apex:commandButton action="{!profile}" value="Go to profile"></apex:commandButton>
             </apex:pageBlockButtons>
         </apex:pageBlock>
 </apex:form>
