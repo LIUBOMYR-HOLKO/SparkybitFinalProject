@@ -48,6 +48,20 @@ public class UserManagerService {
         }
         return false;
     }  
+
+    public Boolean isAuthorized(){
+            CookieManagerService cookieManager = new CookieManagerService();
+            TokenManagerService tokenManager = new TokenManagerService();
+            String userId = tokenManager.getUserIdByRefreshToken(cookieManager.getCookie('REFRESH-TOKEN'));
+            try{
+                User__c manager = [SELECT Id, Manager__c FROM User__c WHERE Id = :userId AND Manager__c = true];
+                return true;
+            }
+            catch(Exception e){
+                System.debug('[UserManagerService.isAuthorized] When you tried check that user is manager you got exception: ' + e);
+            }
+        return false;
+    }  
     
     public PageReference signIn(String email, String password){
         User__c user = findUserByEmail(email);
