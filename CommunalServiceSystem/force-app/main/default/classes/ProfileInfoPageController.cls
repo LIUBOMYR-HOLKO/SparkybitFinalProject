@@ -126,5 +126,20 @@ public class ProfileInfoPageController {
         pageReference.setRedirect(false);
         return pageReference;
     }
+
+    public void contactTheManager(){
+        try{
+            User__c manager = [SELECT Manager__c, State__c, Email__c FROM User__c WHERE Manager__c = true AND State__c = :user.State__c LIMIT 1];
+            System.debug(manager);
+            EmailManagerService emailManager = new EmailManagerService();
+            emailManager.sendEmail(new List<String>{manager.Email__c}, 'Contact the client with email '+user.Email__c+' and username '+user.Name+'.', 'Contact with client');
+
+            ApexPages.addMessage(new ApexPages.Message(ApexPages.severity.INFO, 'Your application has been sent to the regional manager'));
+        }
+        catch(Exception e){
+            ApexPages.addMessage(new ApexPages.Message(ApexPages.severity.ERROR, 'Sorry but in your region doesnot exist any manager'));
+            System.debug('[ProfileInfoPageController.contactTheManager] When you tried contact the manager you got exception'+e);
+        }
+    }
     
 }
