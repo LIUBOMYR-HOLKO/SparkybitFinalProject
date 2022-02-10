@@ -16,8 +16,8 @@ public class ShowUsersPageController {
                 CookieManagerService cookieManager = new CookieManagerService();
                 String Id = tokenManager.getUserIdByRefreshToken(cookieManager.getCookie('REFRESH-TOKEN'));
 
-                manager = [SELECT Id, State__c FROM User__c WHERE Id = :Id];
-                users = [SELECT Id, Name, Email__c, State__c, Manager__c FROM User__c WHERE State__c = :manager.State__c AND Manager__c = false];
+                manager = [SELECT Id, Region__c FROM User__c WHERE Id = :Id];
+                users = [SELECT Id, Name, Email__c, Region__c, Manager__c FROM User__c WHERE Region__c = :manager.Region__c AND Manager__c = false];
         }
         
     }

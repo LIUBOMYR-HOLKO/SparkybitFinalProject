@@ -1,16 +1,17 @@
 <apex:page controller="ProfileInfoPageController" action="{!updateTokens}">
-    <apex:pageMessages />
+
 <apex:form >
-<apex:pageBlock >
+<apex:pageBlock id="ProfileInfoBlock">    
+    <apex:pageMessages />
     <apex:pageBlockSection >
 
         <apex:outputLabel >Name</apex:outputLabel>
             <apex:outputLabel value="{!name}" ></apex:outputLabel>
     <apex:outputLabel >Deposit</apex:outputLabel>
     <apex:outputLabel value="{!deposit}"></apex:outputLabel>
-    <apex:outputLabel >State</apex:outputLabel>
-    <apex:selectList value="{!state}" size="1">
-                            <apex:selectOptions value="{!states}"/>
+    <apex:outputLabel >Region</apex:outputLabel>
+    <apex:selectList value="{!regionName}" size="1">
+                            <apex:selectOptions value="{!regions}"/>
                             <apex:actionSupport event="onchange"/>
     </apex:selectList>
     <apex:outputLabel >Electricity Meter Readings</apex:outputLabel>
@@ -28,10 +29,10 @@
 
 </apex:pageBlockSection>
     <apex:pageBlockButtons >
-        <apex:commandButton action="{!quicksave}" value="Save"/>
+        <apex:commandButton action="{!quicksave}" value="Save" reRender="ProfileInfoBlock"/>
         <apex:commandButton action="{!pay}" value="Pay"/>
         <apex:commandButton action="{!showHistory}" value="Show History"/>
-        <apex:commandButton action="{!contactTheManager}" value="Contact The Manager"/>
+        <apex:commandButton action="{!contactTheManager}" value="Contact The Manager" reRender="ProfileInfoBlock"/>
     </apex:pageBlockButtons>
 </apex:pageBlock>
 </apex:form>

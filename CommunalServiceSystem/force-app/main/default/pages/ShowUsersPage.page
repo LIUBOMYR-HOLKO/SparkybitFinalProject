@@ -14,7 +14,7 @@
                               </apex:commandButton>
                   </apex:column>
                 <apex:column value="{!user.Email__c}"/>
-                <apex:column value="{!user.State__c}"/>
+                <apex:column value="{!user.Region__c}"/>
             </apex:pageBlockTable>
 
             </apex:pageBlock>

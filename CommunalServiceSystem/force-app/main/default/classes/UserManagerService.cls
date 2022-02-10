@@ -9,7 +9,7 @@ public class UserManagerService {
         try{
             String encryptedPassword = EncodingUtil.convertToHex(encrypt(user.Password__c));
             User__c userInDB = new User__c(Email__c = user.Email__c, Password__c = encryptedPassword, 
-                                           Name = user.Name, State__c = user.State__c);
+                                           Name = user.Name, Region__c = user.Region__c);
 
             insert userInDB;
             System.debug('[UserManagerService.createUser] User successfully registered');
@@ -94,7 +94,7 @@ public class UserManagerService {
             User__c createdUser = createUser(user);
             System.debug(createdUser);
             EmailManagerService emailManager = new EmailManagerService();
-            emailManager.sendEmail(new List<String>{user.Email__c}, 'You have successfully registered on the site', 'Welcome to the site');
+            //emailManager.sendEmail(new List<String>{user.Email__c}, 'You have successfully registered on the site', 'Welcome to the site');
             return signIn(createdUser.Email__c, user.Password__c);
         }
         catch(Exception e){

@@ -8,9 +8,9 @@
             <apex:inputText value="{!password}"/>
             <apex:outputLabel >Username: </apex:outputLabel>
             <apex:inputText value="{!name}"/>
-            <apex:outputLabel >State</apex:outputLabel>
-            <apex:selectList value="{!state}" size="1">
-                <apex:selectOptions value="{!states}"/>
+            <apex:outputLabel >Region</apex:outputLabel>
+            <apex:selectList value="{!regionName}" size="1">
+                <apex:selectOptions value="{!regions}"/>
                 <apex:actionSupport event="onchange"/>
             </apex:selectList>
 
