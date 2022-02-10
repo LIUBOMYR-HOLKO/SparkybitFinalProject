@@ -28,4 +28,10 @@ public class HistoryPaymentPageController {
         }
         return null;
     }
+
+
+    public PageReference redirectToProfileInfoPage(){
+        PageReference pg = new pageReference('/apex/ProfileInfoPage');
+        return pg;
+    }
 }

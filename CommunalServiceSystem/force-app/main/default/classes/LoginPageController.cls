@@ -6,4 +6,14 @@ public class LoginPageController {
         UserManagerService userManager = new UserManagerService();
         return userManager.signIn(email, password);
     }
+
+    public PageReference redirectToRegisterPage(){
+        PageReference pg = new pageReference('/apex/RegisterPage');
+        return pg;
+    }
+
+    public PageReference redirectToHomePage(){
+        PageReference pg = new pageReference('/apex/HomePage');
+        return pg;
+    }
 }

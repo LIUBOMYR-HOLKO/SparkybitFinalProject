@@ -7,6 +7,11 @@
         	<apex:column value="{!bill.Amount__c}"/>
             <apex:column value="{!bill.CreatedDate}"/>
         </apex:pageBlockTable>
+
+        <apex:pageBlockButtons>
+
+            <apex:commandButton action="{!redirectToProfileInfoPage}" value="Go to profile"></apex:commandButton>
+        </apex:pageBlockButtons>
         </apex:pageBlock>
     
     </apex:form>

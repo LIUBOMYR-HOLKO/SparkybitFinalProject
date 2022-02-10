@@ -73,7 +73,7 @@ public class PaymentPageController {
         return null;
     }
 
-    public Pagereference profile(){
+    public Pagereference redirectToProfileInfoPage(){
         return new Pagereference('/apex/ProfileInfoPage');
     }
 

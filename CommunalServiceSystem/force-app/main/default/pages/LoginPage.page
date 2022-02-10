@@ -8,7 +8,8 @@
             <apex:inputText value="{!password}"/>
             
             <apex:commandButton value="Login" action="{!login}"/>
-            
+            <apex:commandButton value="I haven't account" action="{!redirectToRegisterPage}"/>
+            <apex:commandButton value="Home page" action="{!redirectToHomePage}"/>
         </apex:pageBlock>
     </apex:form>
 </apex:page>

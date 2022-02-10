@@ -27,4 +27,14 @@ public class RegisterPageController {
         }     
         return options;
     }
+
+    public PageReference redirectToLoginPage(){
+        PageReference pg = new pageReference('/apex/LoginPage');
+        return pg;
+    }
+
+    public PageReference redirectToHomePage(){
+        PageReference pg = new pageReference('/apex/HomePage');
+        return pg;
+    }
 }
