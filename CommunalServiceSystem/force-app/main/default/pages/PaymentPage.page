@@ -22,7 +22,7 @@
             <apex:outputLabel >Amount For Water</apex:outputLabel>
             <apex:outputLabel value="{!amountForWater}"></apex:outputLabel>
             </apex:pageBlockSection>
-            <apex:pageBlockButtons>
+            <apex:pageBlockButtons >
                 <apex:commandButton action="{!pay}" value="Amount to pay {!amountToPay}"></apex:commandButton>
                 <apex:commandButton action="{!redirectToProfileInfoPage}" value="Go to profile"></apex:commandButton>
             </apex:pageBlockButtons>

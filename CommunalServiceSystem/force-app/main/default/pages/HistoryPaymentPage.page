@@ -8,7 +8,7 @@
             <apex:column value="{!bill.CreatedDate}"/>
         </apex:pageBlockTable>
 
-        <apex:pageBlockButtons>
+        <apex:pageBlockButtons >
 
             <apex:commandButton action="{!redirectToProfileInfoPage}" value="Go to profile"></apex:commandButton>
         </apex:pageBlockButtons>

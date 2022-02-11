@@ -29,12 +29,12 @@ public class RegisterPageController {
     }
 
     public PageReference redirectToLoginPage(){
-        PageReference pg = new pageReference('/apex/LoginPage');
-        return pg;
+        PageReference pageReference = new pageReference('/apex/LoginPage');
+        return pageReference;
     }
 
     public PageReference redirectToHomePage(){
-        PageReference pg = new pageReference('/apex/HomePage');
-        return pg;
+        PageReference pageReference = new pageReference('/apex/HomePage');
+        return pageReference;
     }
 }

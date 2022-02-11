@@ -1,5 +1,5 @@
 <apex:page controller="RegionRatesPageController" action="{!updateTokens}">
-    <apex:pageMessages/>
+    <apex:pageMessages />
     <apex:form >
         <apex:pageBlock >
             <apex:pageBlockSection >
@@ -16,7 +16,7 @@
             <apex:inputText value="{!waterRates}"></apex:inputText>
         
         </apex:pageBlockSection>
-            <apex:pageBlockButtons>
+            <apex:pageBlockButtons >
                 <apex:commandButton action="{!quicksave}" value="Save changes"></apex:commandButton>
             </apex:pageBlockButtons>
         </apex:pageBlock>
