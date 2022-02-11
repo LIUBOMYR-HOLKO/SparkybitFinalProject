@@ -16,7 +16,7 @@ public class PaymentPageController {
         
         CookieManagerService cookieManager = new CookieManagerService();
         String Id = tokenManager.getUserIdByAccessToken(cookieManager.getCookie('ACCESS-TOKEN'));
-        user = [SELECT Id,Name,Deposit__c,Amount_For_Electricity__c,Amount_For_Gas__c ,Amount_For_Water__c FROM User__c WHERE Id = :Id];
+        user = [SELECT Id,Name,Email__c,Deposit__c,Amount_For_Electricity__c,Amount_For_Gas__c ,Amount_For_Water__c FROM User__c WHERE Id = :Id];
         
         paymentFraction = '0.25';
         deposit = user.Deposit__c;
@@ -53,6 +53,11 @@ public class PaymentPageController {
                 
                 Billing__c billing = new Billing__c(Name = user.Name + ' ' +amountToPay.round(), User__c = user.Id, Amount__c = amountToPay, Part_Of_Amount__c =paymentFractionDecimal*100);
                 insert billing;
+
+                EmailManagerService emailManager = new EmailManagerService();
+                Messaging.EmailFileAttachment billInPDF =  emailManager.generatePDF(user.Name, paymentFractionDecimal, amountToPay, Datetime.now());
+                emailManager.sendEmailWithAttachments(new List<String>{user.Email__c}, 'Hi, ' + user.Name + '!\nYou successfully pay for services.',
+                             'Bill', new List<Messaging.EmailFileAttachment>{billInPDF});
             }
             return pageReference;
         }
