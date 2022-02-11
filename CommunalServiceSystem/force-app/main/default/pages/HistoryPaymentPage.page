@@ -1,4 +1,4 @@
-<apex:page controller="HistoryPaymentPageController" action="{!updateTokens}">
+<apex:page controller="HistoryPaymentPageController" action="{!authChecker}">
     <apex:form >
     <apex:pageBlock >
         <apex:pageBlockTable value="{!billings}" var="bill">

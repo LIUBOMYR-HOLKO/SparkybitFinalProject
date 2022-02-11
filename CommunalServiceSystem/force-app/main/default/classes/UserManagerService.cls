@@ -52,7 +52,7 @@ public class UserManagerService {
     public Boolean isAuthorized(){
             CookieManagerService cookieManager = new CookieManagerService();
             TokenManagerService tokenManager = new TokenManagerService();
-            String userId = tokenManager.getUserIdByRefreshToken(cookieManager.getCookie('REFRESH-TOKEN'));
+            String userId = tokenManager.getUserIdByAccessToken(cookieManager.getCookie('ACCESS-TOKEN'));
             try{
                 User__c manager = [SELECT Id, Manager__c FROM User__c WHERE Id = :userId AND Manager__c = true];
                 return true;
