@@ -32,6 +32,22 @@ public class TokenManagerService {
         }
     }
     
+    public String getUserIdByAccessToken(String accessToken){
+        try{
+            if(checkSignatures()){
+                String [] separatedJWT = accessToken.split('\\.');
+                String payload = EncodingUtil.base64Decode(separatedJWT[1]).toString();
+                String userId = payload.substringBetween('sub":"', '"');
+				return userId;
+            }
+            return null;
+        }
+        catch(Exception e){
+            System.debug('[TokenManagerService.getUserIdByAccessToken] When you tried to find user ID by access token you got exception: ' + e);
+            return null;
+        }
+    }
+    
     public String generateRefreshToken(String userId){
         String token='';
         for(Integer i = 0; i<40;i++){
