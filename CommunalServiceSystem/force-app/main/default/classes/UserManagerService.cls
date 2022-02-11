@@ -102,4 +102,19 @@ public class UserManagerService {
         }
         return null;
     }
+    
+    public PageReference updateTokenIfNecessary(){
+        if(isAuthenticated()){
+            return null;
+        }else{
+            TokenManagerService tokenManager = new TokenManagerService();
+            PageReference pageReferenceAfterUpdateTokens = tokenManager.updateTokens();
+            if(pageReferenceAfterUpdateTokens == null){
+                PageReference pageReferenceOnCurrentPage = new PageReference(ApexPages.currentPage().getUrl());
+                pageReferenceOnCurrentPage.setRedirect(true);
+                return pageReferenceOnCurrentPage;
+            }
+            return pageReferenceAfterUpdateTokens;
+        }        
+    }
 }
