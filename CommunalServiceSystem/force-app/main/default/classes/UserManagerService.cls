@@ -88,6 +88,13 @@ public class UserManagerService {
         return null;
     }
     
+    public Pagereference signOut(){
+        Cookie accessCookie = new Cookie('ACCESS-TOKEN', null, null, 0, true);
+        Cookie refreshCookie = new Cookie('REFRESH-TOKEN', null, null, 0, true);
+        ApexPages.currentPage().setCookies(new Cookie[] {accessCookie,refreshCookie});
+        return new Pagereference('/apex/HomePage');
+    }
+
     public PageReference signUp(User__c user){
         try{
             System.debug(user);

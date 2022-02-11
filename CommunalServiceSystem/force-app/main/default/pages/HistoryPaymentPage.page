@@ -10,7 +10,7 @@
 
         <apex:pageBlockButtons >
 
-            <apex:commandButton action="{!redirectToProfileInfoPage}" value="Go to profile"></apex:commandButton>
+            <apex:commandButton rendered="{!!manager}" action="{!redirectToProfileInfoPage}" value="Go to profile"></apex:commandButton>
         </apex:pageBlockButtons>
         </apex:pageBlock>
     

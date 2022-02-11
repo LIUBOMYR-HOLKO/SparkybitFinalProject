@@ -1,6 +1,7 @@
 public class HistoryPaymentPageController {
     public List<Billing__c> billings{get;set;}
-    
+    public Boolean manager{get;set;}
+
     //can see everybody if know ID. Fix it    
     public HistoryPaymentPageController() {
         UserManagerService userManager = new UserManagerService();
@@ -12,7 +13,11 @@ public class HistoryPaymentPageController {
     
     public Pagereference authChecker(){
         UserManagerService userManager = new UserManagerService();
-        return userManager.updateTokenIfNecessary();
+        PageReference pageReference = userManager.updateTokenIfNecessary();
+        if(userManager.isAuthorized()){
+            manager = true;
+        }
+        return pageReference;
     }
     
     

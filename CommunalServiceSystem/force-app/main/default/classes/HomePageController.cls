@@ -1,16 +1,60 @@
 public class HomePageController {
+    public Boolean guess{get;set;}
+    public Boolean user{get;set;}
+    public Boolean manager{get;set;}
+    
+    public HomePageController(){
+        guess = false;
+        user = false;
+        manager = false;
+    }
+    public PageReference authChecker(){
+        UserManagerService userManager = new UserManagerService();
+        PageReference pageReference = userManager.updateTokenIfNecessary();
+        
+        if(pageReference == null){        
+            if(userManager.isAuthorized()){
+                manager = true;
+            }
+            else{
+                user = true;
+            }
+            return null;
+        }
+        else if(pageReference.getUrl() == '/apex/LoginPage'){
+            guess = true;
+            return null;
+        }
+        Pagereference currentReference = ApexPages.currentPage();
+        currentReference.setRedirect(true);
+        return currentReference;
+    }
+    
     public PageReference redirectToLoginPage(){
-        PageReference pg = new pageReference('/apex/LoginPage');
-        return pg;
+        PageReference pageReference = new pageReference('/apex/LoginPage');
+        return pageReference;
     }
     
     public PageReference redirectToProfileInfoPage(){
-        PageReference pg = new pageReference('/apex/ProfileInfoPage');
-        return pg;
+        PageReference pageReference = new pageReference('/apex/ProfileInfoPage');
+        return pageReference;
     }
-
+    
     public PageReference redirectToRegisterPage(){
-        PageReference pg = new pageReference('/apex/RegisterPage');
-        return pg;
+        PageReference pageReference = new pageReference('/apex/RegisterPage');
+        return pageReference;
     }
+    
+    public PageReference redirectToShowUsersPage(){
+        PageReference pageReference = new pageReference('/apex/ShowUsersPage');
+        return pageReference;
+    }
+    /*
+    public PageReference redirectToHomePage(){
+        UserManagerService userManager = new UserManagerService();
+        PageReference pageReference = userManager.signOut();
+        pageReference.setRedirect(true);
+        return pageReference;
+    }
+    */
 }
