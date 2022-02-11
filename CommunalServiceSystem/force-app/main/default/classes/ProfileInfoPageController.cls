@@ -19,13 +19,9 @@ public class ProfileInfoPageController {
     TokenManagerService tokenManager = new TokenManagerService();
 
     public ProfileInfoPageController(){
-        UserManagerService userManager = new UserManagerService();
-        hasAccess = userManager.isAuthenticated();
-        
-        if(hasAccess){
-            System.debug('debug');
+        try{
             CookieManagerService cookieManager = new CookieManagerService();
-            Id = tokenManager.getUserIdByRefreshToken(cookieManager.getCookie('REFRESH-TOKEN'));
+            Id = tokenManager.getUserIdByAccessToken(cookieManager.getCookie('ACCESS-TOKEN'));
             user = [SELECT Id, Amount_For_Electricity__c, Amount_For_Gas__c, Amount_For_Water__c, 
             Deposit__c, Electricity_Meter_Readings__c, Email__c, Gas_Meter_Readings__c,
             Region__r.Name, Water_Meter_Readings__c, Name FROM User__c WHERE Id = :Id ];
@@ -40,29 +36,22 @@ public class ProfileInfoPageController {
             waterMeterReadings = user.Water_Meter_Readings__c;
             amountForWater = user.Amount_For_Water__c;
         }
+        catch(Exception e){
+            System.debug('constructor of controller'+e);
+        }
     }
 
     public List<SelectOption> regionsToSelectOptionList(){
         List<SelectOption> options= new List<SelectOption>();
-        
         for(Region__c region : [SELECT Name FROM Region__c]){
             options.add(new SelectOption(region.Name,region.Name));
         }     
         return options;
     }
 
-    public Pagereference updateTokens(){
-        if(!hasAccess){
-            PageReference pageReference = new PageReference(ApexPages.currentPage().getUrl());
-            pageReference.setRedirect(true);
-            
-            PageReference result = tokenManager.updateTokens();
-            if(result == null){
-                return pageReference; 
-            }
-            return result;
-        }
-        return null;
+    public Pagereference authChecker(){
+		UserManagerService userManager = new UserManagerService();
+        return userManager.updateTokenIfNecessary();
     }
 	
     
