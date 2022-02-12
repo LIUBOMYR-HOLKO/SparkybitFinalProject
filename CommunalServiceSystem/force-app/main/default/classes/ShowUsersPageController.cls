@@ -39,4 +39,7 @@ public class ShowUsersPageController {
         return pageReference;
     }
     
+    public Pagereference redirectToHomePage(){
+        return new PageReference('/apex/HomePage');
+    }
 }

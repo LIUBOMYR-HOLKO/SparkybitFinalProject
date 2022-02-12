@@ -16,7 +16,9 @@
                 <apex:column value="{!user.Email__c}"/>
                 <apex:column value="{!user.Region__c}"/>
             </apex:pageBlockTable>
-
+			<apex:pageBlockButtons >
+            <apex:commandButton action="{!redirectToHomePage}" value="Home page"/>
+            </apex:pageBlockButtons>
             </apex:pageBlock>
         
         </apex:form>
