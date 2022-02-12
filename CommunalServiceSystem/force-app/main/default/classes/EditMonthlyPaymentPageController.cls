@@ -12,13 +12,17 @@ public class EditMonthlyPaymentPageController {
     public User__c user{get;set;}
     
     public EditMonthlyPaymentPageController() {
+        try{
         String Id = apexpages.currentpage().getparameters().get('id');
         user = [SELECT Id, Name, Amount_For_Electricity__c, Amount_For_Gas__c, Amount_For_Water__c FROM User__c WHERE Id = :Id];
         name = user.Name;
         amountForElectricity = user.Amount_For_Electricity__c;
         amountForGas = user.Amount_For_Gas__c;
         amountForWater = user.Amount_For_Water__c;
-        
+        }
+        catch(Exception e){
+            System.debug('[EditMonthlyPaymentPageController.constructor] Instance of controller gave exception'+e);
+        }
         
     }
     public Pagereference authChecker(){
