@@ -11,7 +11,6 @@
             <apex:outputLabel >Region</apex:outputLabel>
             <apex:selectList value="{!regionName}" size="1">
                 <apex:selectOptions value="{!regions}"/>
-                <apex:actionSupport event="onchange"/>
             </apex:selectList>
 
             <apex:commandButton value="Register" action="{!register}"/>

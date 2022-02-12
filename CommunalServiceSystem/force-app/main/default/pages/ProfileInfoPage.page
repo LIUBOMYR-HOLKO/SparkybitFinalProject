@@ -12,7 +12,6 @@
     <apex:outputLabel >Region</apex:outputLabel>
     <apex:selectList value="{!regionName}" size="1">
                             <apex:selectOptions value="{!regions}"/>
-                            <apex:actionSupport event="onchange"/>
     </apex:selectList>
     <apex:outputLabel >Electricity Meter Readings</apex:outputLabel>
     <apex:inputText value="{!electricityMeterReadings}"></apex:inputText>
