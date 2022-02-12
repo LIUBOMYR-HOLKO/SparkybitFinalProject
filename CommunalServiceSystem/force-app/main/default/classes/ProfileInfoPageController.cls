@@ -68,7 +68,7 @@ public class ProfileInfoPageController {
             
             if(region.Name!=user.Region__r.Name){
                 Decimal amountToPay = user.Amount_For_Electricity__c + user.Amount_For_Gas__c + user.Amount_For_Water__c;
-
+                
                 if(amountToPay!= 0){
                     return false;
                 }else{
@@ -116,7 +116,7 @@ public class ProfileInfoPageController {
             ApexPages.addMessage(new ApexPages.Message(ApexPages.severity.INFO, 'Your application has been sent to the regional manager'));
             
             sendEmailResults = emailManager.sendEmail(new List<String>{manager.Email__c}, 'Contact the client with email '+user.Email__c+' and username '+user.Name+'.', 'Contact with client');
-        	return sendEmailResults;
+            return sendEmailResults;
         }
         catch(Exception e){
             ApexPages.addMessage(new ApexPages.Message(ApexPages.severity.ERROR, 'Sorry but in your region doesnot exist any manager'));

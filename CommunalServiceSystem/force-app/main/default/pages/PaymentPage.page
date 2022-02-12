@@ -1,33 +1,33 @@
 <apex:page controller="PaymentPageController" action="{!authChecker}">
     
-        
-<apex:form >
-    <apex:pageMessages />
+    
+    <apex:form >
+        <apex:pageMessages />
         <apex:pageBlock id="pageBlock">
             
             <apex:pageBlockSection >
-            <apex:outputLabel >Your deposit</apex:outputLabel>
-            <apex:outputLabel value="{!deposit}"></apex:outputLabel>
-        <apex:outputLabel >Which part you would like to pay?</apex:outputLabel>
-
+                <apex:outputLabel >Your deposit</apex:outputLabel>
+                <apex:outputLabel value="{!deposit}"></apex:outputLabel>
+                <apex:outputLabel >Which part you would like to pay?</apex:outputLabel>
+                
                 <apex:selectList value="{!paymentFraction}" size="1">
                     <apex:selectOptions value="{!partOrAllPayment}"/>
                     <apex:actionSupport reRender="pageBlock" event="onchange"/>
-            </apex:selectList>
-
-            <apex:outputLabel >Amount For Electricity</apex:outputLabel>
-            <apex:outputLabel value="{!amountForElectricity}"></apex:outputLabel>
-            <apex:outputLabel >Amount For Gas</apex:outputLabel>
-            <apex:outputLabel value="{!amountForGas}"></apex:outputLabel>
-            <apex:outputLabel >Amount For Water</apex:outputLabel>
-            <apex:outputLabel value="{!amountForWater}"></apex:outputLabel>
+                </apex:selectList>
+                
+                <apex:outputLabel >Amount For Electricity</apex:outputLabel>
+                <apex:outputLabel value="{!amountForElectricity}"></apex:outputLabel>
+                <apex:outputLabel >Amount For Gas</apex:outputLabel>
+                <apex:outputLabel value="{!amountForGas}"></apex:outputLabel>
+                <apex:outputLabel >Amount For Water</apex:outputLabel>
+                <apex:outputLabel value="{!amountForWater}"></apex:outputLabel>
             </apex:pageBlockSection>
             <apex:pageBlockButtons >
                 <apex:commandButton action="{!pay}" value="Amount to pay {!amountToPay}"></apex:commandButton>
                 <apex:commandButton action="{!redirectToProfileInfoPage}" value="Go to profile"></apex:commandButton>
             </apex:pageBlockButtons>
         </apex:pageBlock>
-</apex:form>
-
-
+    </apex:form>
+    
+    
 </apex:page>

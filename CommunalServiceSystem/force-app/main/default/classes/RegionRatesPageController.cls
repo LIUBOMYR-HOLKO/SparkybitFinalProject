@@ -46,7 +46,7 @@ public class RegionRatesPageController {
         }
     }
     
-        public PageReference redirectToHomePage(){
+    public PageReference redirectToHomePage(){
         return new pageReference('/apex/HomePage');
     }
 }

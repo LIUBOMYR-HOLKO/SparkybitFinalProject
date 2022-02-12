@@ -1,25 +1,25 @@
 <apex:page controller="ShowUsersPageController" action="{!authChecker}">
     <apex:form id="mainForm" >
         <apex:pageBlock >
-
+            
             <apex:pageBlockTable value="{!users}" var="user">
                 <apex:column >
-                  <apex:commandButton action="{!seeHistory}" value="See Payment History" reRender="mainForm" >
-                                <apex:param name="userId" assignTo="{!userId}" value="{!user.Id}" />
-                            </apex:commandButton>
+                    <apex:commandButton action="{!seeHistory}" value="See Payment History" reRender="mainForm" >
+                        <apex:param name="userId" assignTo="{!userId}" value="{!user.Id}" />
+                    </apex:commandButton>
                 </apex:column>
                 <apex:column >
                     <apex:commandButton action="{!editMonthlyPayment}" value="Edit Monthly Payment" reRender="mainForm" >
-                                  <apex:param name="userId" assignTo="{!userId}" value="{!user.Id}" />
-                              </apex:commandButton>
-                  </apex:column>
+                        <apex:param name="userId" assignTo="{!userId}" value="{!user.Id}" />
+                    </apex:commandButton>
+                </apex:column>
                 <apex:column value="{!user.Email__c}"/>
                 <apex:column value="{!user.Region__c}"/>
             </apex:pageBlockTable>
-			<apex:pageBlockButtons >
-            <apex:commandButton action="{!redirectToHomePage}" value="Home page"/>
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!redirectToHomePage}" value="Home page"/>
             </apex:pageBlockButtons>
-            </apex:pageBlock>
+        </apex:pageBlock>
         
-        </apex:form>
-    </apex:page>
+    </apex:form>
+</apex:page>

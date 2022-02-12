@@ -12,7 +12,7 @@
             <apex:selectList value="{!regionName}" size="1">
                 <apex:selectOptions value="{!regions}"/>
             </apex:selectList>
-
+            
             <apex:commandButton value="Register" action="{!register}"/>
             <apex:commandButton value="I already have account" action="{!redirectToLoginPage}"/>
             <apex:commandButton value="Home page" action="{!redirectToHomePage}"/>

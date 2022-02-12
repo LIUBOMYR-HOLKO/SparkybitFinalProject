@@ -30,7 +30,7 @@ public class PaymentPageController {
     public List<SelectOption> partOrAllPayment{
         get{
             return new List<SelectOption>{new SelectOption('0.25','25%'), new SelectOption('0.50', '50%'),new SelectOption('0.75','75%'), new SelectOption('1', '100%')};
-            }
+                }
         set;
     }
     
@@ -47,11 +47,11 @@ public class PaymentPageController {
                 
                 Billing__c billing = new Billing__c(Name = user.Name + ' ' +amountToPay.round(), User__c = user.Id, Amount__c = amountToPay, Part_Of_Amount__c =paymentFractionDecimal*100);
                 insert billing;
-
+                
                 EmailManagerService emailManager = new EmailManagerService();
                 Messaging.EmailFileAttachment billInPDF =  emailManager.generatePDF(user.Name, paymentFractionDecimal, amountToPay, Datetime.now());
                 //emailManager.sendEmailWithAttachments(new List<String>{user.Email__c}, 'Hi, ' + user.Name + '!\nYou successfully pay for services.',
-                  //           'Bill', new List<Messaging.EmailFileAttachment>{billInPDF});
+                //           'Bill', new List<Messaging.EmailFileAttachment>{billInPDF});
             }
             return pageReference;
         }

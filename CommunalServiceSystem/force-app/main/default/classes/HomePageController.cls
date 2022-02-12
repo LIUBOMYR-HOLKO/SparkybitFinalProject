@@ -44,7 +44,7 @@ public class HomePageController {
         PageReference pageReference = new pageReference('/apex/ShowUsersPage');
         return pageReference;
     }
-    /**/
+
     public PageReference redirectToHomePage(){
         UserManagerService userManager = new UserManagerService();
         PageReference pageReference = userManager.signOut();

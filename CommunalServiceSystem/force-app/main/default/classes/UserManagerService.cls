@@ -10,7 +10,7 @@ public class UserManagerService {
             String encryptedPassword = EncodingUtil.convertToHex(encrypt(user.Password__c));
             User__c userInDB = new User__c(Email__c = user.Email__c, Password__c = encryptedPassword, 
                                            Name = user.Name, Region__c = user.Region__c);
-
+            
             insert userInDB;
             System.debug('[UserManagerService.createUser] User successfully registered');
             return user;
@@ -48,18 +48,18 @@ public class UserManagerService {
         }
         return false;
     }  
-
+    
     public Boolean isAuthorized(){
-            CookieManagerService cookieManager = new CookieManagerService();
-            TokenManagerService tokenManager = new TokenManagerService();
-            String userId = tokenManager.getUserIdByAccessToken(cookieManager.getCookie('ACCESS-TOKEN'));
-            try{
-                User__c manager = [SELECT Id, Manager__c FROM User__c WHERE Id = :userId AND Manager__c = true];
-                return true;
-            }
-            catch(Exception e){
-                System.debug('[UserManagerService.isAuthorized] When you tried check that user is manager you got exception: ' + e);
-            }
+        CookieManagerService cookieManager = new CookieManagerService();
+        TokenManagerService tokenManager = new TokenManagerService();
+        String userId = tokenManager.getUserIdByAccessToken(cookieManager.getCookie('ACCESS-TOKEN'));
+        try{
+            User__c manager = [SELECT Id, Manager__c FROM User__c WHERE Id = :userId AND Manager__c = true];
+            return true;
+        }
+        catch(Exception e){
+            System.debug('[UserManagerService.isAuthorized] When you tried check that user is manager you got exception: ' + e);
+        }
         return false;
     }  
     
@@ -94,7 +94,7 @@ public class UserManagerService {
         ApexPages.currentPage().setCookies(new Cookie[] {accessCookie,refreshCookie});
         return new Pagereference('/apex/HomePage');
     }
-
+    
     public PageReference signUp(User__c user){
         try{
             System.debug(user);

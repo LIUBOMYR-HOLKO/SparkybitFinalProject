@@ -38,7 +38,7 @@ public class TokenManagerService {
                 String [] separatedJWT = accessToken.split('\\.');
                 String payload = EncodingUtil.base64Decode(separatedJWT[1]).toString();
                 String userId = payload.substringBetween('sub":"', '"');
-				return userId;
+                return userId;
             }
             return null;
         }

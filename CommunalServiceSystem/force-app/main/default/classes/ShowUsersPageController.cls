@@ -2,9 +2,9 @@ public class ShowUsersPageController {
     public User__c manager{get;set;}
     public List<User__c> users{get;set;}
     public String userId{get;set;}
-
-
-
+    
+    
+    
     public ShowUsersPageController() {
         try{
             TokenManagerService tokenManager = new TokenManagerService();
@@ -20,20 +20,20 @@ public class ShowUsersPageController {
     }
     
     public Pagereference authChecker(){
-		UserManagerService userManager = new UserManagerService();
+        UserManagerService userManager = new UserManagerService();
         PageReference pageReference = userManager.updateTokenIfNecessary();
         if(userManager.isAuthorized()){
             return pageReference;
         }
         return new PageReference('/apex/HomePage');
     }
-
-
+    
+    
     public Pagereference seeHistory(){
         Pagereference pageReference = new Pagereference('/apex/HistoryPaymentPage?id='+userId);
         return pageReference;
     }
-
+    
     public Pagereference editMonthlyPayment(){
         Pagereference pageReference = new Pagereference('/apex/EditMonthlyPaymentPage?id='+userId);
         return pageReference;

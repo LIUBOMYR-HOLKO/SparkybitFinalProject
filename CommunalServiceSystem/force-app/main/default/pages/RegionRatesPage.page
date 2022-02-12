@@ -3,23 +3,23 @@
     <apex:form >
         <apex:pageBlock >
             <apex:pageBlockSection >
-        
-            <apex:outputLabel >Name</apex:outputLabel>
-            <apex:outputLabel value="{!name}" ></apex:outputLabel>
-            <apex:outputLabel >State</apex:outputLabel>
-            <apex:outputLabel value="{!state}" ></apex:outputLabel>
-            <apex:outputLabel >Electricity Rates</apex:outputLabel>
-            <apex:inputText value="{!electricityRates}"></apex:inputText>
-            <apex:outputLabel >Gas Rates</apex:outputLabel>
-            <apex:inputText value="{!gasRates}"></apex:inputText>
-            <apex:outputLabel >Water Rates</apex:outputLabel>
-            <apex:inputText value="{!waterRates}"></apex:inputText>
-        
-        </apex:pageBlockSection>
+                
+                <apex:outputLabel >Name</apex:outputLabel>
+                <apex:outputLabel value="{!name}" ></apex:outputLabel>
+                <apex:outputLabel >State</apex:outputLabel>
+                <apex:outputLabel value="{!state}" ></apex:outputLabel>
+                <apex:outputLabel >Electricity Rates</apex:outputLabel>
+                <apex:inputText value="{!electricityRates}"></apex:inputText>
+                <apex:outputLabel >Gas Rates</apex:outputLabel>
+                <apex:inputText value="{!gasRates}"></apex:inputText>
+                <apex:outputLabel >Water Rates</apex:outputLabel>
+                <apex:inputText value="{!waterRates}"></apex:inputText>
+                
+            </apex:pageBlockSection>
             <apex:pageBlockButtons >
                 <apex:commandButton action="{!quicksave}" value="Save Changes"></apex:commandButton>
                 <apex:commandButton action="{!redirectToHomePage}" value="Home Page"/>
             </apex:pageBlockButtons>
         </apex:pageBlock>
-        </apex:form>
+    </apex:form>
 </apex:page>

@@ -1,18 +1,18 @@
 <apex:page controller="HistoryPaymentPageController" action="{!authChecker}">
     <apex:form >
-    <apex:pageBlock >
-        <apex:pageBlockTable value="{!billings}" var="bill">
-            <apex:column value="{!bill.User__r.Name}"/>
-        	<apex:column value="{!bill.Part_Of_Amount__c}"/>
-        	<apex:column value="{!bill.Amount__c}"/>
-            <apex:column value="{!bill.CreatedDate}"/>
-        </apex:pageBlockTable>
-
-        <apex:pageBlockButtons >
-
-            <apex:commandButton rendered="{!!manager}" action="{!redirectToProfileInfoPage}" value="Go to profile"></apex:commandButton>
-        </apex:pageBlockButtons>
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!billings}" var="bill">
+                <apex:column value="{!bill.User__r.Name}"/>
+                <apex:column value="{!bill.Part_Of_Amount__c}"/>
+                <apex:column value="{!bill.Amount__c}"/>
+                <apex:column value="{!bill.CreatedDate}"/>
+            </apex:pageBlockTable>
+            
+            <apex:pageBlockButtons >
+                
+                <apex:commandButton rendered="{!!manager}" action="{!redirectToProfileInfoPage}" value="Go to profile"></apex:commandButton>
+            </apex:pageBlockButtons>
         </apex:pageBlock>
-    
+        
     </apex:form>
 </apex:page>

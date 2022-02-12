@@ -1,23 +1,23 @@
 <apex:page controller="EditMonthlyPaymentPageController" action="{!authChecker}">
     <apex:pageMessages />
-<apex:form >
-<apex:pageBlock >
-    <apex:pageBlockSection >
-
-        <apex:outputLabel >Name</apex:outputLabel>
-            <apex:outputLabel value="{!name}" ></apex:outputLabel>
-    <apex:outputLabel >Amount For Electricity</apex:outputLabel>
-    <apex:inputText value="{!amountForElectricity}"></apex:inputText>
-    <apex:outputLabel >Amount For Gas</apex:outputLabel>
-    <apex:inputText value="{!amountForGas}"></apex:inputText>
-    <apex:outputLabel >Amount For Water</apex:outputLabel>
-    <apex:inputText value="{!amountForWater}"></apex:inputText>
-
-</apex:pageBlockSection>
-    <apex:pageBlockButtons >
-        <apex:commandButton action="{!quicksave}" value="Save"/>
-        <apex:commandButton action="{!redirectToShowUsers}" value="Show Users" />
-    </apex:pageBlockButtons>
-</apex:pageBlock>
-</apex:form>
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                
+                <apex:outputLabel >Name</apex:outputLabel>
+                <apex:outputLabel value="{!name}" ></apex:outputLabel>
+                <apex:outputLabel >Amount For Electricity</apex:outputLabel>
+                <apex:inputText value="{!amountForElectricity}"></apex:inputText>
+                <apex:outputLabel >Amount For Gas</apex:outputLabel>
+                <apex:inputText value="{!amountForGas}"></apex:inputText>
+                <apex:outputLabel >Amount For Water</apex:outputLabel>
+                <apex:inputText value="{!amountForWater}"></apex:inputText>
+                
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!quicksave}" value="Save"/>
+                <apex:commandButton action="{!redirectToShowUsers}" value="Show Users" />
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
 </apex:page>

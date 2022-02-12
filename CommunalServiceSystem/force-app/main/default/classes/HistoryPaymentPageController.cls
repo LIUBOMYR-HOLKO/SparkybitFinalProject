@@ -1,7 +1,7 @@
 public class HistoryPaymentPageController {
     public List<Billing__c> billings{get;set;}
     public Boolean manager{get;set;}
-
+    
     //can see everybody if know ID. Fix it    
     public HistoryPaymentPageController() {
         UserManagerService userManager = new UserManagerService();
@@ -19,8 +19,6 @@ public class HistoryPaymentPageController {
         }
         return pageReference;
     }
-    
-    
     
     public PageReference redirectToProfileInfoPage(){
         PageReference pg = new pageReference('/apex/ProfileInfoPage');
