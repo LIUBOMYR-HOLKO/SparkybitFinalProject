@@ -16,6 +16,7 @@
 </apex:pageBlockSection>
     <apex:pageBlockButtons >
         <apex:commandButton action="{!quicksave}" value="Save"/>
+        <apex:commandButton action="{!redirectToShowUsers}" value="Show Users" />
     </apex:pageBlockButtons>
 </apex:pageBlock>
 </apex:form>

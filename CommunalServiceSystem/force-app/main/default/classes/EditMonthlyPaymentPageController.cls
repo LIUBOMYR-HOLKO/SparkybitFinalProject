@@ -48,4 +48,8 @@ public class EditMonthlyPaymentPageController {
         return pageReference;
     }
     
+    public Pagereference redirectToShowUsers(){
+        return new PageReference('/apex/ShowUsersPage');
+	}
+    
 }
