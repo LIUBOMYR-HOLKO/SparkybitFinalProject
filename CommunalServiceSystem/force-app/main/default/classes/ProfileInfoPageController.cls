@@ -37,7 +37,7 @@ public class ProfileInfoPageController {
             amountForWater = user.Amount_For_Water__c;
         }
         catch(Exception e){
-            System.debug('constructor of controller'+e);
+            System.debug('[ProfileInfoPageController.constructor] Instance of controller gave an exception: '+e);
         }
     }
     
@@ -68,14 +68,10 @@ public class ProfileInfoPageController {
             
             if(region.Name!=user.Region__r.Name){
                 Decimal amountToPay = user.Amount_For_Electricity__c + user.Amount_For_Gas__c + user.Amount_For_Water__c;
-                System.debug(amountToPay);
-                System.debug(amountToPay!=0);
+
                 if(amountToPay!= 0){
-                    System.debug('here 1');
-                    
                     return false;
                 }else{
-                    System.debug('here 2');
                     user.Region__c= region.Id;
                     return true;
                 }
@@ -87,55 +83,47 @@ public class ProfileInfoPageController {
         }
         return true;
     }
+    
     public void quicksave(){
         try{
-            
             if(canSetUserData()){
                 update user;
                 amountForElectricity = user.Amount_For_Electricity__c;
-                
                 amountForGas = user.Amount_For_Gas__c;
-                
                 amountForWater = user.Amount_For_Water__c;
             }else{
-                System.debug('apexPagesMessage');
                 ApexPages.addMessage(new ApexPages.Message(ApexPages.severity.ERROR, 'You cannot update state if you have dobt'));
-                //     return null;
             }
         }
         catch(Exception e){
             System.debug('[ProfileInfoPageController.quicksave] When you tried update user you got exception'+e);
         }
-        //PageReference pageReference = new PageReference('/apex/ProfileInfoPage');
-        //pageReference.setRedirect(true);
-        //return pageReference;
     }
     
     public PageReference pay(){
-        PageReference pageReference = new PageReference('/apex/PaymentPage');
-        pageReference.setRedirect(false);
-        return pageReference;
+        return new PageReference('/apex/PaymentPage');
     }
     
     public PageReference showHistory(){
-        PageReference pageReference = new PageReference('/apex/HistoryPaymentPage?id='+user.Id);
-        pageReference.setRedirect(false);
-        return pageReference;
+        return new PageReference('/apex/HistoryPaymentPage?id='+user.Id);
     }
     
-    public void contactTheManager(){
+    public List<Messaging.SendEmailResult> contactTheManager(){
+        List<Messaging.SendEmailResult> sendEmailResults;
         try{
             User__c manager = [SELECT Manager__c, Region__r.Name, Email__c FROM User__c WHERE Manager__c = true AND Region__r.Name = :user.Region__r.Name LIMIT 1];
-            System.debug(manager);
             EmailManagerService emailManager = new EmailManagerService();
-            emailManager.sendEmail(new List<String>{manager.Email__c}, 'Contact the client with email '+user.Email__c+' and username '+user.Name+'.', 'Contact with client');
-            
             ApexPages.addMessage(new ApexPages.Message(ApexPages.severity.INFO, 'Your application has been sent to the regional manager'));
+            
+            sendEmailResults = emailManager.sendEmail(new List<String>{manager.Email__c}, 'Contact the client with email '+user.Email__c+' and username '+user.Name+'.', 'Contact with client');
+        	return sendEmailResults;
         }
         catch(Exception e){
             ApexPages.addMessage(new ApexPages.Message(ApexPages.severity.ERROR, 'Sorry but in your region doesnot exist any manager'));
             System.debug('[ProfileInfoPageController.contactTheManager] When you tried contact the manager you got exception'+e);
         }
+        
+        return sendEmailResults;
     }
     
 }
