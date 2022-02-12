@@ -5,7 +5,8 @@
             <apex:commandButton rendered="{!guest}" value="Register" action="{!redirectToRegisterPage}"/>
             <apex:commandButton rendered="{!user}" value="Profile info" action="{!redirectToProfileInfoPage}"/>
             <apex:commandButton rendered="{!manager}" value="Show users" action="{!redirectToShowUsersPage}"/>
-            <!-- <apex:commandButton rendered="{!OR(user,manager)}" value="Log out" action="{!redirectToHomePage}"/> -->
+            <apex:commandButton rendered="{!manager}" value="Region rates" action="{!redirectToRegionRatesPage}"/>
+            <apex:commandButton rendered="{!OR(user,manager)}" value="Log out" action="{!redirectToHomePage}"/>
         </apex:pageBlock>
     </apex:form>
 </apex:page>

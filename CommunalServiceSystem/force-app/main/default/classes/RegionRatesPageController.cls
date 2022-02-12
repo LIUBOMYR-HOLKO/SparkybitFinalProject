@@ -45,4 +45,8 @@ public class RegionRatesPageController {
             System.debug('[RegionRatesPageController.quicksave] When you tried change rates you got exception: '+e);
         }
     }
+    
+        public PageReference redirectToHomePage(){
+        return new pageReference('/apex/HomePage');
+    }
 }

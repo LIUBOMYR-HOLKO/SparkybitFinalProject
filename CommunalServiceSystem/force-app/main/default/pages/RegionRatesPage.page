@@ -17,7 +17,8 @@
         
         </apex:pageBlockSection>
             <apex:pageBlockButtons >
-                <apex:commandButton action="{!quicksave}" value="Save changes"></apex:commandButton>
+                <apex:commandButton action="{!quicksave}" value="Save Changes"></apex:commandButton>
+                <apex:commandButton action="{!redirectToHomePage}" value="Home Page"/>
             </apex:pageBlockButtons>
         </apex:pageBlock>
         </apex:form>
