@@ -22,7 +22,7 @@ public class RegisterPageController {
     public List<SelectOption> regionsToSelectOptionList(){
         List<SelectOption> options= new List<SelectOption>();
         
-        for(Region__c region : [SELECT Name FROM Region__c]){
+        for(Region__c region : [SELECT Name FROM Region__c ORDER BY Name]){
             options.add(new SelectOption(region.Name,region.Name));
         }     
         return options;
