@@ -5,7 +5,7 @@
             <apex:outputLabel >Email: </apex:outputLabel>
             <apex:inputText value="{!email}"/>
             <apex:outputLabel >Password: </apex:outputLabel>
-            <apex:inputText value="{!password}"/>
+            <apex:inputSecret value="{!password}"/>
             <apex:outputLabel >Username: </apex:outputLabel>
             <apex:inputText value="{!name}"/>
             <apex:outputLabel >Region</apex:outputLabel>
