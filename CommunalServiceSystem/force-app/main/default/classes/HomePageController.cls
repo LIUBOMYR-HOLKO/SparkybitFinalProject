@@ -1,13 +1,8 @@
 public class HomePageController {
-    public Boolean guess{get;set;}
+    public Boolean guest{get;set;}
     public Boolean user{get;set;}
     public Boolean manager{get;set;}
     
-    public HomePageController(){
-        guess = false;
-        user = false;
-        manager = false;
-    }
     public PageReference authChecker(){
         UserManagerService userManager = new UserManagerService();
         PageReference pageReference = userManager.updateTokenIfNecessary();
@@ -22,7 +17,7 @@ public class HomePageController {
             return null;
         }
         else if(pageReference.getUrl() == '/apex/LoginPage'){
-            guess = true;
+            guest = true;
             return null;
         }
         Pagereference currentReference = ApexPages.currentPage();
