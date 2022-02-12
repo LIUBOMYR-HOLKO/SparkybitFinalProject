@@ -10,10 +10,6 @@ public class PaymentPageController {
     TokenManagerService tokenManager = new TokenManagerService();
     
     public PaymentPageController() {
-        UserManagerService userManager = new UserManagerService();
-        
-        
-        
         CookieManagerService cookieManager = new CookieManagerService();
         String Id = tokenManager.getUserIdByAccessToken(cookieManager.getCookie('ACCESS-TOKEN'));
         user = [SELECT Id,Name,Email__c,Deposit__c,Amount_For_Electricity__c,Amount_For_Gas__c ,Amount_For_Water__c FROM User__c WHERE Id = :Id];
@@ -24,9 +20,6 @@ public class PaymentPageController {
         amountForGas = user.Amount_For_Gas__c;
         amountForWater = user.Amount_For_Water__c;
         amountToPay = (amountForElectricity+ amountForGas+amountForWater)*Decimal.valueOf(paymentFraction);
-        
-        
-        
     }
     
     public Pagereference authChecker(){
@@ -37,7 +30,8 @@ public class PaymentPageController {
     public List<SelectOption> partOrAllPayment{
         get{
             return new List<SelectOption>{new SelectOption('0.25','25%'), new SelectOption('0.50', '50%'),new SelectOption('0.75','75%'), new SelectOption('1', '100%')};
-                }
+            }
+        set;
     }
     
     public Pagereference pay(){
@@ -56,15 +50,13 @@ public class PaymentPageController {
 
                 EmailManagerService emailManager = new EmailManagerService();
                 Messaging.EmailFileAttachment billInPDF =  emailManager.generatePDF(user.Name, paymentFractionDecimal, amountToPay, Datetime.now());
-                emailManager.sendEmailWithAttachments(new List<String>{user.Email__c}, 'Hi, ' + user.Name + '!\nYou successfully pay for services.',
-                             'Bill', new List<Messaging.EmailFileAttachment>{billInPDF});
+                //emailManager.sendEmailWithAttachments(new List<String>{user.Email__c}, 'Hi, ' + user.Name + '!\nYou successfully pay for services.',
+                  //           'Bill', new List<Messaging.EmailFileAttachment>{billInPDF});
             }
             return pageReference;
         }
         catch(Exception e){
-            //pageReference.setRedirect(true);
             System.debug('[PaymentPageController.pay] When you tried pay you got exception'+e);
-            
         }
         
         return null;

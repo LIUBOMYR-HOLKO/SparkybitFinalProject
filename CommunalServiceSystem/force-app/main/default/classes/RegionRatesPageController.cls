@@ -1,6 +1,4 @@
 public class RegionRatesPageController {
-    
-    
     public User__c manager{get;set;}
     public Region__c region{get;set;}
     
@@ -14,25 +12,17 @@ public class RegionRatesPageController {
     UserManagerService userManager = new UserManagerService();
     
     public RegionRatesPageController() {
-        
-        
-        
         CookieManagerService cookieManager = new CookieManagerService();
         String Id = tokenManager.getUserIdByAccessToken(cookieManager.getCookie('ACCESS-TOKEN'));
-        System.debug(Id);        
-        manager = [SELECT Id, State__c FROM User__c WHERE Id = :Id];
-        System.debug(manager);
-        region = [SELECT Name, State__c, Electricity_Rate__c, Gas_Rate__c, Water_Rate__c FROM Region__c WHERE State__c = :manager.State__c LIMIT 1];
-                System.debug(region);
+        manager = [SELECT Id, Region__c,Region__r.State__c FROM User__c WHERE Id = :Id];
+        region = [SELECT Name, State__c, Electricity_Rate__c, Gas_Rate__c, Water_Rate__c FROM Region__c WHERE State__c = :manager.Region__r.State__c LIMIT 1];
         name = region.Name;
         state = region.State__c;
         electricityRates = region.Electricity_Rate__c;
         gasRates = region.Gas_Rate__c;
         waterRates = region.Water_Rate__c;
-        
-        
-        
     }
+    
     public Pagereference authChecker(){
         UserManagerService userManager = new UserManagerService();
         PageReference pageReference = userManager.updateTokenIfNecessary();
