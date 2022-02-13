@@ -50,8 +50,8 @@ public class PaymentPageController {
                 
                 EmailManagerService emailManager = new EmailManagerService();
                 Messaging.EmailFileAttachment billInPDF =  emailManager.generatePDF(user.Name, paymentFractionDecimal, amountToPay, Datetime.now());
-                //emailManager.sendEmailWithAttachments(new List<String>{user.Email__c}, 'Hi, ' + user.Name + '!\nYou successfully pay for services.',
-                //           'Bill', new List<Messaging.EmailFileAttachment>{billInPDF});
+               // emailManager.sendEmailWithAttachments(new List<String>{user.Email__c}, 'Hi, ' + user.Name + '!\nYou successfully pay for services.',
+                 //          'Bill', new List<Messaging.EmailFileAttachment>{billInPDF});
             }
             return pageReference;
         }

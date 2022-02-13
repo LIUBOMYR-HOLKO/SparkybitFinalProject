@@ -54,46 +54,26 @@ public class ProfileInfoPageController {
         return userManager.updateTokenIfNecessary();
     }
     
-    
-    public Boolean canSetUserData(){
-        try{
-            Region__c region = [SELECT Id,Name, Gas_Rate__c, Water_Rate__c, Electricity_Rate__c FROM Region__c WHERE Name = :regionName];
-            
-            user.Amount_For_Electricity__c += (electricityMeterReadings - user.Electricity_Meter_Readings__c) *region.Electricity_Rate__c ;
-            user.Electricity_Meter_Readings__c = electricityMeterReadings;
-            user.Amount_For_Gas__c += (gasMeterReadings - user.Gas_Meter_Readings__c)* region.Gas_Rate__c;
-            user.Gas_Meter_Readings__c = gasMeterReadings;
-            user.Amount_For_Water__c += (waterMeterReadings - user.Water_Meter_Readings__c)* region.Water_Rate__c;
-            user.Water_Meter_Readings__c = waterMeterReadings;
-            
-            if(region.Name!=user.Region__r.Name){
-                Decimal amountToPay = user.Amount_For_Electricity__c + user.Amount_For_Gas__c + user.Amount_For_Water__c;
-                
-                if(amountToPay!= 0){
-                    return false;
-                }else{
-                    user.Region__c= region.Id;
-                    return true;
-                }
-            }
-        }catch(Exception e){
-            ApexPages.addMessage(new ApexPages.Message(ApexPages.severity.ERROR, 'In new region doesnnot exist any communal service'));
-            System.debug('[ProfileInfoPageController.quicksave] When you tried update user you got exception'+e);
-            return false;
-        }
-        return true;
-    }
-    
     public void quicksave(){
         try{
-            if(canSetUserData()){
-                update user;
-                amountForElectricity = user.Amount_For_Electricity__c;
-                amountForGas = user.Amount_For_Gas__c;
-                amountForWater = user.Amount_For_Water__c;
-            }else{
-                ApexPages.addMessage(new ApexPages.Message(ApexPages.severity.ERROR, 'You cannot update state if you have dobt'));
-            }
+            Region__c region = [SELECT Id,Name, Gas_Rate__c, Water_Rate__c, Electricity_Rate__c FROM Region__c WHERE Name = :regionName];
+            user.Region__c = region.Id;
+            update user;
+            
+            user.Amount_For_Electricity__c += (electricityMeterReadings - user.Electricity_Meter_Readings__c) * region.Electricity_Rate__c;
+            user.Electricity_Meter_Readings__c = electricityMeterReadings;
+            user.Amount_For_Gas__c += (gasMeterReadings - user.Gas_Meter_Readings__c) * region.Gas_Rate__c;
+            user.Gas_Meter_Readings__c = gasMeterReadings;
+            user.Amount_For_Water__c += (waterMeterReadings - user.Water_Meter_Readings__c) * region.Water_Rate__c;
+            user.Water_Meter_Readings__c = waterMeterReadings;
+            update user;
+            
+            amountForElectricity = user.Amount_For_Electricity__c;
+            amountForGas = user.Amount_For_Gas__c;
+            amountForWater = user.Amount_For_Water__c;
+        }
+        catch(DmlException dmlException){
+            ApexPages.addMessage(new ApexPages.Message(ApexPages.severity.ERROR, dmlException.getDmlMessage(0)));
         }
         catch(Exception e){
             System.debug('[ProfileInfoPageController.quicksave] When you tried update user you got exception'+e);
@@ -108,22 +88,17 @@ public class ProfileInfoPageController {
         return new PageReference('/apex/HistoryPaymentPage?id='+user.Id);
     }
     
-    public List<Messaging.SendEmailResult> contactTheManager(){
-        List<Messaging.SendEmailResult> sendEmailResults;
+    public void contactTheManager(){
         try{
             User__c manager = [SELECT Manager__c, Region__r.Name, Email__c FROM User__c WHERE Manager__c = true AND Region__r.Name = :user.Region__r.Name LIMIT 1];
             EmailManagerService emailManager = new EmailManagerService();
+            //emailManager.sendEmail(new List<String>{manager.Email__c}, 'Contact the client with email '+user.Email__c+' and username '+user.Name+'.', 'Contact with client');
             ApexPages.addMessage(new ApexPages.Message(ApexPages.severity.INFO, 'Your application has been sent to the regional manager'));
-            
-            sendEmailResults = emailManager.sendEmail(new List<String>{manager.Email__c}, 'Contact the client with email '+user.Email__c+' and username '+user.Name+'.', 'Contact with client');
-            return sendEmailResults;
         }
         catch(Exception e){
             ApexPages.addMessage(new ApexPages.Message(ApexPages.severity.ERROR, 'Sorry but in your region doesnot exist any manager'));
             System.debug('[ProfileInfoPageController.contactTheManager] When you tried contact the manager you got exception'+e);
         }
-        
-        return sendEmailResults;
     }
     
 }
